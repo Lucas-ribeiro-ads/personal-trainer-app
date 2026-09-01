@@ -9,7 +9,7 @@ export const alunoService = {
     create: (data) => api.post('/alunos', data),
     update: (id, data) => api.put(`/alunos/${id}`, data),
     delete: (id) => api.delete(`/alunos/${id}`)
-}
+};
 
 export const treinoService = {
     getAll: () => api.get('/treinos'),
@@ -17,7 +17,6 @@ export const treinoService = {
     update: (id, data) => api.put(`/treinos/${id}`, data),
     delete: (id) => api.delete(`/treinos/${id}`)
 };
-
 
 export const mensalidadeService = {
     getAll: () => api.get('/mensalidades'),
