@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Alunos from './pages/Alunos';
@@ -6,7 +7,7 @@ import Mensalidades from './pages/Mensalidades';
 import { alunoService, treinoService, mensalidadeService } from './services/api';
 
 function Dashboard() {
-  const [stats, setStats] = useState({ alunos: 0, treinos: 0, mensalidades: 0, pagas: 0, pendentes: 0, atrasadas: 0 });
+  const [stats, setStats] = useState({ alunos: 0, treinos: 0, mensalidades: 0 });
 
   useEffect(() => {
     carregarDados();
@@ -21,13 +22,11 @@ function Dashboard() {
       ]);
 
       const mensalidades = resMensal.data;
+
       setStats({
         alunos: resAlunos.data.length,
         treinos: resTreinos.data.length,
-        mensalidades: mensalidades.length,
-        pagas: mensalidades.filter(m => m.status === 'PAGO').length,
-        pendentes: mensalidades.filter(m => m.status === 'PENDENTE').length,
-        atrasadas: mensalidades.filter(m => m.status === 'ATRASADO').length
+        mensalidades: mensalidades.length
       });
     } catch (err) {
       console.error('Erro ao carregar estatísticas:', err);
@@ -44,25 +43,15 @@ function Dashboard() {
           <h3>Alunos</h3>
           <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>{stats.alunos}</p>
         </div>
+
         <div style={{ padding: '1.5rem', background: '#e8f5e9', borderRadius: '10px' }}>
           <h3>Treinos</h3>
           <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>{stats.treinos}</p>
         </div>
+
         <div style={{ padding: '1.5rem', background: '#e8f5e9', borderRadius: '10px' }}>
           <h3>Mensalidades</h3>
           <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>{stats.mensalidades}</p>
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-        <div style={{ padding: '1rem', background: '#e8f5e9', borderRadius: '8px' }}>
-          Pagas: <strong>{stats.pagas}</strong>
-        </div>
-        <div style={{ padding: '1rem', background: '#e8f5e9', borderRadius: '8px' }}>
-          Pendentes: <strong>{stats.pendentes}</strong>
-        </div>
-        <div style={{ padding: '1rem', background: '#e8f5e9', borderRadius: '8px' }}>
-          Atrasadas: <strong>{stats.atrasadas}</strong>
         </div>
       </div>
     </div>
