@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 const app = express();
 const prisma = new PrismaClient();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -98,5 +98,7 @@ app.delete("/api/mensalidades/:id", async (req, res) => {
     await prisma.mensalidade.delete({ where: { id: Number(id) } });
     res.status(204).send();
 });
+
+
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
