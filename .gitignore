@@ -5,4 +5,4 @@ dist/
 build/
 *.db
 *.db-journal
-npm-debug.log*
+npm-debug.log*git add frontend
